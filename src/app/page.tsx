@@ -1,6 +1,7 @@
 import Header from "./components/Header";
 import HeroBanner from "./components/HeroBanner";
 import FeaturedArticles from "./components/FeaturedArticles";
+import { TopHeadlines } from "./components/TopHeadlines";
 
 export default function Home() {
      return (
@@ -8,6 +9,7 @@ export default function Home() {
                <Header />
                <HeroBanner />
                <FeaturedArticles />
+               <TopHeadlines/>
           </div>
      );
 }
