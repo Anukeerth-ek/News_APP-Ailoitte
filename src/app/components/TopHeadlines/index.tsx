@@ -8,6 +8,8 @@ import SearchInput from "../Search";
 import NewsCard from "../NewsCard";
 import ErrorMessage from "../ErrorMessage";
 import { CountrySelector } from "../CountrySelector";
+import NewsCardShimmer from "../Shimmer/NewsCardShimmer";
+import { Loader, Loader2 } from "lucide-react";
 
 const TopHeadlines = () => {
      const router = useRouter();
@@ -85,7 +87,7 @@ const TopHeadlines = () => {
      if (error) return <ErrorMessage error={error} />;
 
      return (
-        <section className="px-4 ">
+          <section className="px-4 ">
                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
                     <h2 className="text-2xl font-bold">Top Headlines</h2>
                     <div className="flex flex-col lg:flex-row gap-3 w-full sm:w-auto">
@@ -96,12 +98,18 @@ const TopHeadlines = () => {
                </div>
 
                <div className="grid grid-cols-1 xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    {newsData.slice(1, visibleCount).map((news, index) => (
-                         <NewsCard key={index} news={news} />
-                    ))}
+                    {loading
+                         ? Array(6)
+                                .fill(0)
+                                .map((_, idx) => <NewsCardShimmer key={idx} />)
+                         : newsData.slice(1, visibleCount).map((news, index) => <NewsCard key={index} news={news} />)}
                </div>
 
-               {loading && <p className="text-center mt-4">Loading...</p>}
+               {loading && (
+                    <div className="flex justify-center items-center mt-4 text-red-800">
+                         <Loader className="animate-spin w-6 h-6" />
+                    </div>
+               )}
                {!loading && visibleCount >= newsData.length && (
                     <p className="text-center text-gray-500 my-4">I think you have reached the end!</p>
                )}
@@ -109,4 +117,4 @@ const TopHeadlines = () => {
      );
 };
 
-export default TopHeadlines
+export default TopHeadlines;
