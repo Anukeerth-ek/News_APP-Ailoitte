@@ -32,21 +32,21 @@ const Header = () => {
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-600 transition-all duration-200 group-hover:w-full"></span>
             </Link>
             <Link 
-              href="/top-headlines" 
+              href="/" 
               className="text-sm font-medium text-gray-700 hover:text-red-600 transition-colors duration-200 relative group"
             >
               News
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-600 transition-all duration-200 group-hover:w-full"></span>
             </Link>
             <Link 
-              href="#" 
+              href="/" 
               className="text-sm font-medium text-gray-700 hover:text-red-600 transition-colors duration-200 relative group"
             >
               About
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-600 transition-all duration-200 group-hover:w-full"></span>
             </Link>
             <Link 
-              href="#" 
+              href="/" 
               className="text-sm font-medium text-gray-700 hover:text-red-600 transition-colors duration-200 relative group"
             >
               Contact
@@ -84,19 +84,19 @@ const Header = () => {
                 Home
               </Link>
               <Link 
-                href="/top-headlines" 
+                href="/" 
                 className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-red-600 hover:bg-gray-50 rounded-md transition-colors duration-200"
               >
                 News
               </Link>
               <Link 
-                href="/about" 
+                href="/" 
                 className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-red-600 hover:bg-gray-50 rounded-md transition-colors duration-200"
               >
                 About
               </Link>
               <Link 
-                href="#" 
+                href="/" 
                 className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-red-600 hover:bg-gray-50 rounded-md transition-colors duration-200"
               >
                 Contact
