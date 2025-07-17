@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+import { handleCalculateReadTime } from "../utils/readTime";
 
 type NewsCardProps = {
      imageUrl: string;
@@ -13,6 +14,7 @@ type NewsCardProps = {
 
 const NewsCard = ({ id, news }: any) => {
      console.log("hello", news);
+     const readTime = handleCalculateReadTime(news.content);
      return (
           <Link href={news.url} target="_blank" rel="noopener noreferrer">
                <div className="max-w-xs rounded-lg shadow-md bg-white overflow-hidden">
@@ -33,11 +35,11 @@ const NewsCard = ({ id, news }: any) => {
                                    {news.publishedAt ? new Date(news.publishedAt).toLocaleDateString() : "yesterday"}
                               </span>
                          </div>
-                         <h2 className="text-md font-semibold leading-tight">{news.title}</h2>
-                         <p className="text-sm text-gray-600 mt-1 line-clamp-2">{news.description}</p>
+                         <h2 className="text-md font-semibold leading-tight line-clamp-3">{news.title}</h2>
+                         <p className="text-sm text-gray-600 mt-1 line-clamp-2">{news.content}</p>
                          <div className="text-xs text-gray-500 mt-2 flex justify-between">
                               <span className="text-red-500 font-medium">{news.author}</span>
-                              <span>{"5mins"} read</span>
+                              <span>{readTime ? `${readTime} min read` : ""}</span>
                          </div>
                     </div>
                </div>

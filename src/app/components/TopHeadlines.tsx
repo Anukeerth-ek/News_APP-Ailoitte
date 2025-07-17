@@ -12,7 +12,7 @@ export const TopHeadlines = () => {
      const { newsData, loading, error } = useFetchNews(category, query);
      console.log("new", newsData);
 
-     const [visibleCount, setVisibleCount] = useState(8);
+     const [visibleCount, setVisibleCount] = useState(9);
 
      useEffect(() => {
           const handleScroll = () => {
@@ -35,7 +35,7 @@ export const TopHeadlines = () => {
      useEffect(() => {
           setVisibleCount(8);
      }, [category, query]);
-     
+
      return (
           <section className=" px-4">
                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
@@ -65,7 +65,7 @@ export const TopHeadlines = () => {
                </div>
 
                <div className="grid grid-cols-1 xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    {newsData.slice(0, visibleCount).map((news, idx) => (
+                    {newsData.slice(1, visibleCount).map((news, idx) => (
                          <NewsCard key={idx} news={news} />
                     ))}
                </div>

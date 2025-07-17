@@ -1,12 +1,25 @@
-import Image from "next/image";
+"use client";
+
 import React from "react";
+import { useFetchNews } from "../hooks/useFetchNews";
+import { handleCalculateReadTime } from "../utils/readTime";
 
 const FeaturedArticles = () => {
+     const { newsData, loading, error } = useFetchNews();
+
+     if (loading || newsData.length === 0) return null;
+     const featured = newsData[0];
+     console.log("feature", featured);
+     const readTime = handleCalculateReadTime(featured.description);
+
      return (
           <section className="flex flex-col md:flex-row md:justify-center gap-12 px-6 md:px-0 py-10 bg-white ">
                <div className="w-full md:w-1/2 h-1/2">
-                    <Image
-                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHMZgOBFSHooVjTf0PFuur2m_wblFcG6fP-qC6TeeU1-BqvSiTLiSLraSRSb4_oId7tXE&usqp=CAU"
+                    <img
+                         src={
+                              featured?.urlToImage ||
+                              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHMZgOBFSHooVjTf0PFuur2m_wblFcG6fP-qC6TeeU1-BqvSiTLiSLraSRSb4_oId7tXE&usqp=CAU"
+                         }
                          alt="John Wick Chapter 4"
                          width={420}
                          height={280}
@@ -14,13 +27,18 @@ const FeaturedArticles = () => {
                     />
                </div>
                <div className="w-full md:w-1/2 flex flex-col justify-center gap-3">
-                    <p className="text-sm text-gray-600">Netflix · 12 minutes ago</p>
-                    <h2 className="text-4xl font-bold text-gray-900 leading-snug">Where To Watch 'John Wick: Chapter 4'</h2>
-                    <p className="text-gray-700 text-sm leading-relaxed max-w-xl">
-                         There’s been no official announcement regarding John Wick: Chapter 4’s streaming release. However,
-                         given it’s a Lionsgate film, John Wick: Chapter 4 will eventually be released on Starz...
+                    <p className="text-sm text-gray-600">
+                         {featured?.source?.name} ·{" "}
+                         <span>
+                              {" "}
+                              {featured?.publishedAt ? new Date(featured.publishedAt).toLocaleDateString() : "5mins ago"}
+                         </span>
                     </p>
-                    <p className="text-sm text-red-500 font-medium">Movies · 4 min read</p>
+                    <h2 className="text-4xl font-bold text-gray-900 leading-snug">{featured?.title}</h2>
+                    <p className="text-gray-700 text-sm leading-relaxed max-w-xl">{featured?.description}</p>
+                    <p className="text-sm text-red-500 font-medium">
+                         {featured?.author} · <span>{readTime ? `${readTime} min read` : ""}</span>
+                    </p>
                </div>
           </section>
      );

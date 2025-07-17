@@ -4,7 +4,7 @@ import { getCategoryNews, getTopHeadlines, searchNews } from "../utils/newsApi";
 // const API_KEY = process.env.NEXT_PUBLIC_NEWS_API_KEY;
 // const BASE_URL = "https://newsapi.org/v2";
 
-export const useFetchNews = (category: string, query: string) => {
+export const useFetchNews = (category?: string, query?: string) => {
      const [newsData, setNewsData] = useState<any[]>([]);
      const [loading, setLoading] = useState(false);
      const [error, setError] = useState<string | null>(null);
