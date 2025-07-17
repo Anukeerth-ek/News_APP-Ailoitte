@@ -1,32 +1,52 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import { getCategoryNews, getTopHeadlines, searchNews } from "../utils/newsApi";
-
-// const API_KEY = process.env.NEXT_PUBLIC_NEWS_API_KEY;
-// const BASE_URL = "https://newsapi.org/v2";
 
 export const useFetchNews = (category?: string, query?: string) => {
      const [newsData, setNewsData] = useState<any[]>([]);
      const [loading, setLoading] = useState(false);
      const [error, setError] = useState<string | null>(null);
      const [page, setPage] = useState(1);
+
      useEffect(() => {
+          if (!query) return;
+
+          const debounceTimeout = setTimeout(() => {
+               const fetchSearchResults = async () => {
+                    setLoading(true);
+                    setError(null);
+                    try {
+                         const data = await searchNews(query, page);
+                         setNewsData(data.articles || []);
+                    } catch (err) {
+                         setError("Failed to fetch search results.");
+                    } finally {
+                         setLoading(false);
+                    }
+               };
+
+               fetchSearchResults();
+          }, 500);
+
+          return () => clearTimeout(debounceTimeout);
+     }, [query, page]);
+
+     useEffect(() => {
+          if (query) return;
+
           const fetchNews = async () => {
                setLoading(true);
                setError(null);
-
                try {
                     let data;
-
-                    if (query) {
-                         data = await searchNews(query, page);
-                    } else if (category) {
+                    if (category) {
                          data = await getCategoryNews(category, page);
                     } else {
                          data = await getTopHeadlines(page);
                     }
-
                     setNewsData(data.articles || []);
-               } catch (err: any) {
+               } catch (err) {
                     setError("Failed to fetch news.");
                } finally {
                     setLoading(false);
@@ -34,7 +54,7 @@ export const useFetchNews = (category?: string, query?: string) => {
           };
 
           fetchNews();
-     }, [category, query]);
+     }, [category, page, query]);
 
      return { newsData, loading, error };
 };
