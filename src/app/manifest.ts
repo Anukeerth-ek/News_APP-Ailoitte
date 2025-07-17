@@ -12,37 +12,37 @@ export default function manifest(): MetadataRoute.Manifest {
           theme_color: "#000",
           icons: [
                {
-                    src: "FeatureArticle_FallBack.webp",
+                    src: "/FeatureArticle_FallBack.webp",
                     sizes: "16x16",
                     type: "image/png",
                },
                {
-                    src: "FeatureArticle_FallBack.webp",
+                    src: "/FeatureArticle_FallBack.webp",
                     sizes: "32x32",
                     type: "image/png",
                },
                {
-                    src: "FeatureArticle_FallBack.webp",
+                    src: "/FeatureArticle_FallBack.webp",
                     sizes: "48x48",
                     type: "image/png",
                },
                {
-                    src: "FeatureArticle_FallBack.webp",
+                    src: "/FeatureArticle_FallBack.webp",
                     sizes: "76x76",
                     type: "image/png",
                },
                {
-                    src: "FeatureArticle_FallBack.webp",
+                    src: "/FeatureArticle_FallBack.webp",
                     sizes: "120x120",
                     type: "image/png",
                },
                {
-                    src: "FeatureArticle_FallBack.webp",
+                    src: "/FeatureArticle_FallBack.webp",
                     sizes: "192x192",
                     type: "image/png",
                },
                {
-                    src: "FeatureArticle_FallBack.webp",
+                    src: "/FeatureArticle_FallBack.webp",
                     sizes: "512x512",
                     type: "image/png",
                },
