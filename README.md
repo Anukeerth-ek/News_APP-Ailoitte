@@ -1,3 +1,7 @@
+<img width="1918" height="909" alt="image" src="https://github.com/user-attachments/assets/6508f349-3109-48ae-8617-ec2f1e0e885a" />
+
+<img width="1919" height="914" alt="image" src="https://github.com/user-attachments/assets/feb8bf6f-abf0-4847-9f9c-4bbaf8a68f17" />
+
 # 📰 NewsGlobe
 
 A modern, responsive news application built using **Next.js** that fetches real-time news articles using the **News API**. Includes category-based filtering, search functionality, pagination, and detailed article views.
