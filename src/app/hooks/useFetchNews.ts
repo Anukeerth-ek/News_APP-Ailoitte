@@ -1,64 +1,67 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getCategoryNews, getTopHeadlines, searchNews } from "../utils/newsApi";
 import { NewsArticle } from "../types/news";
 
 export const useFetchNews = (category?: string, query?: string) => {
-     const [newsData, setNewsData] = useState<NewsArticle[]>([]);
-     const [loading, setLoading] = useState(false);
-     const [error, setError] = useState<string | null>(null);
+  const [newsData, setNewsData] = useState<NewsArticle[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-     useEffect(() => {
-          if (!query) return;
+  useEffect(() => {
+    if (!query) return;
 
-          const debounceTimeout = setTimeout(() => {
-               const fetchSearchResults = async () => {
-                    setLoading(true);
-                    setError(null);
-                    try {
-                         const data = await searchNews(query, 1);
+    const debounceTimeout = setTimeout(() => {
+      const fetchSearchResults = async () => {
+        setLoading(true);
+        setError(null);
+        try {
+          const res = await fetch(`/api/news/search?query=${query}`);
+          if (!res.ok) throw new Error("Failed to fetch search results");
 
-                         setNewsData(data.articles || []);
-                    } catch (err) {
-                         setError("Failed to fetch search results.");
-                         console.log("Error", err);
-                    } finally {
-                         setLoading(false);
-                    }
-               };
+          const data = await res.json();
+          setNewsData(data.articles || []);
+        } catch (err) {
+          setError("Failed to fetch search results.");
+          console.error("Error", err);
+        } finally {
+          setLoading(false);
+        }
+      };
 
-               fetchSearchResults();
-          }, 500);
+      fetchSearchResults();
+    }, 500);
 
-          return () => clearTimeout(debounceTimeout);
-     }, [query]);
+    return () => clearTimeout(debounceTimeout);
+  }, [query]);
 
-     useEffect(() => {
-          if (query) return;
+  useEffect(() => {
+    if (query) return;
 
-          const fetchNews = async () => {
-               setLoading(true);
-               setError(null);
-               try {
-                    let data;
-                    if (category) {
-                         data = await getCategoryNews(category, 1);
-                    } else {
-                         data = await getTopHeadlines(1);
-                    }
-                    console.log("arti", data.articles);
-                    setNewsData(data.articles || []);
-               } catch (err) {
-                    setError("Failed to fetch news.");
-                    console.log("Error", err);
-               } finally {
-                    setLoading(false);
-               }
-          };
+    const fetchNews = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        let endpoint = "/api/news/top-headlines";
+        if (category) {
+          endpoint = `/api/news/category?category=${category}`;
+        }
 
-          fetchNews();
-     }, [category, query]);
+        const res = await fetch(endpoint);
+        if (!res.ok) throw new Error("Failed to fetch news");
 
-     return { newsData, loading, error };
+        const data = await res.json();
+        setNewsData(data.articles || []);
+      } catch (err) {
+        setError("Failed to fetch news.");
+        console.error("Error", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchNews();
+  }, [category, query]);
+
+  return { newsData, loading, error };
 };
