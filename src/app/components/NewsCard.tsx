@@ -7,7 +7,7 @@ interface NewsCardProps {
      news: NewsArticle;
 }
 const NewsCard = ({ news }: NewsCardProps) => {
-     console.log("hello", news);
+     // console.log("hello", news);
      const readTime = handleCalculateReadTime(news.content);
      const newCardFallBackImg = "/FeatureArticle_FallBack.webp";
      return (
