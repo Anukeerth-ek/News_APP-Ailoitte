@@ -1,32 +1,31 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { getCategoryNews, getTopHeadlines, searchNews } from "../utils/newsApi";
 
-const API_KEY = process.env.NEXT_PUBLIC_NEWS_API_KEY;
-const BASE_URL = "https://newsapi.org/v2";
+// const API_KEY = process.env.NEXT_PUBLIC_NEWS_API_KEY;
+// const BASE_URL = "https://newsapi.org/v2";
 
 export const useFetchNews = (category: string, query: string) => {
      const [newsData, setNewsData] = useState<any[]>([]);
      const [loading, setLoading] = useState(false);
      const [error, setError] = useState<string | null>(null);
-
+     const [page, setPage] = useState(1);
      useEffect(() => {
           const fetchNews = async () => {
                setLoading(true);
                setError(null);
 
                try {
-                    let url = "";
+                    let data;
 
                     if (query) {
-                         url = `${BASE_URL}/everything?q=${query}&apiKey=${API_KEY}`;
+                         data = await searchNews(query, page);
                     } else if (category) {
-                         url = `${BASE_URL}/top-headlines?category=${category}&country=us&apiKey=${API_KEY}`;
+                         data = await getCategoryNews(category, page);
                     } else {
-                         url = `${BASE_URL}/top-headlines?country=us&apiKey=${API_KEY}`;
+                         data = await getTopHeadlines(page);
                     }
 
-                    const response = await axios.get(url);
-                    setNewsData(response.data.articles || []);
+                    setNewsData(data.articles || []);
                } catch (err: any) {
                     setError("Failed to fetch news.");
                } finally {

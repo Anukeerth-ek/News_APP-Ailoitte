@@ -5,11 +5,11 @@ import { TopHeadlines } from "./components/TopHeadlines";
 
 export default function Home() {
      return (
-          <div className="px-28">
+          <div className="px-4 sm:px-6 md:px-12 lg:px-20 xl:px-28">
                <Header />
                <HeroBanner />
                <FeaturedArticles />
-               <TopHeadlines/>
+               <TopHeadlines />
           </div>
      );
 }

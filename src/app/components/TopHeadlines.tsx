@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NewsCard from "./NewsCard";
 import { getTopHeadlines } from "../utils/newsApi";
 import { useFetchNews } from "../hooks/useFetchNews";
@@ -11,6 +11,31 @@ export const TopHeadlines = () => {
      const [query, setQuery] = useState("");
      const { newsData, loading, error } = useFetchNews(category, query);
      console.log("new", newsData);
+
+     const [visibleCount, setVisibleCount] = useState(8);
+
+     useEffect(() => {
+          const handleScroll = () => {
+               const scrollTop = window.scrollY;
+               const windowHeight = window.innerHeight;
+               const fullHeight = document.body.offsetHeight;
+
+               if (scrollTop + windowHeight >= fullHeight - 100 && !loading) {
+                    setVisibleCount((prev) => Math.min(prev + 8, newsData.length));
+               }
+          };
+
+          window.addEventListener("scroll", handleScroll);
+
+          return () => {
+               window.removeEventListener("scroll", handleScroll);
+          };
+     }, [loading, newsData]);
+
+     useEffect(() => {
+          setVisibleCount(8);
+     }, [category, query]);
+     
      return (
           <section className=" px-4">
                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
@@ -39,11 +64,16 @@ export const TopHeadlines = () => {
                     </div>
                </div>
 
-               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    {newsData.map((news, idx) => (
+               <div className="grid grid-cols-1 xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    {newsData.slice(0, visibleCount).map((news, idx) => (
                          <NewsCard key={idx} news={news} />
                     ))}
                </div>
+
+               {loading && <p className="text-center mt-4">Loading...</p>}
+               {!loading && visibleCount >= newsData.length && (
+                    <p className="text-center text-gray-500 my-4">I think you have reached the end!</p>
+               )}
           </section>
      );
 };
