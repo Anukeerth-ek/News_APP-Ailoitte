@@ -2,9 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { getCategoryNews, getTopHeadlines, searchNews } from "../utils/newsApi";
+import { NewsArticle } from "../types/news";
 
 export const useFetchNews = (category?: string, query?: string) => {
-     const [newsData, setNewsData] = useState<any[]>([]);
+     const [newsData, setNewsData] = useState<NewsArticle[]>([]);
      const [loading, setLoading] = useState(false);
      const [error, setError] = useState<string | null>(null);
      const [page, setPage] = useState(1);
@@ -18,6 +19,7 @@ export const useFetchNews = (category?: string, query?: string) => {
                     setError(null);
                     try {
                          const data = await searchNews(query, page);
+
                          setNewsData(data.articles || []);
                     } catch (err) {
                          setError("Failed to fetch search results.");
@@ -45,6 +47,7 @@ export const useFetchNews = (category?: string, query?: string) => {
                     } else {
                          data = await getTopHeadlines(page);
                     }
+                    console.log("arti", data.articles);
                     setNewsData(data.articles || []);
                } catch (err) {
                     setError("Failed to fetch news.");

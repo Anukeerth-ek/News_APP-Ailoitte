@@ -1,23 +1,18 @@
 import Link from "next/link";
 import React from "react";
 import { handleCalculateReadTime } from "../utils/readTime";
+import { NewsArticle } from "../types/news";
 
-type NewsCardProps = {
-     imageUrl: string;
-     title: string;
-     description: string;
-     source: string;
-     date: string;
-     category: string;
-     readTime: string;
-};
-
-const NewsCard = ({ id, news }: any) => {
+interface NewsCardProps {
+     id: string | number;
+     news: NewsArticle;
+}
+const NewsCard = ({ id, news }: NewsCardProps) => {
      console.log("hello", news);
      const readTime = handleCalculateReadTime(news.content);
      const newCardFallBackImg = "/FeatureArticle_FallBack.webp";
      return (
-          <Link href={news.url} target="_blank" rel="noopener noreferrer">
+          <Link href={news.url} key={id} target="_blank" rel="noopener noreferrer">
                <div className="max-w-xs rounded-lg shadow-md bg-white overflow-hidden">
                     <div className="w-full h-48">
                          <img
