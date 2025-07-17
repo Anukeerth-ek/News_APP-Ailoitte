@@ -32,7 +32,7 @@ const NewsCard = ({ news, className = "" }: NewsCardProps) => {
      };
 
      return (
-          <Link href={news.url} target="_blank" rel="noopener noreferrer" className={`block group ${className}`}>
+          // <Link href={news.url} target="_blank" rel="noopener noreferrer" className={`block group ${className}`}>
                <article className="max-w-xs bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-gray-200 hover:-translate-y-1">
                     <div className="relative w-full h-48 overflow-hidden">
                          <img
@@ -72,7 +72,7 @@ const NewsCard = ({ news, className = "" }: NewsCardProps) => {
                          </div>
                     </div>
                </article>
-          </Link>
+          // </Link>
      );
 };
 

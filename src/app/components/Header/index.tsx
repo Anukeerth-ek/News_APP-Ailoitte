@@ -25,31 +25,31 @@ const Header = () => {
 
           <nav className="hidden md:flex items-center space-x-8">
             <Link 
-              href="#" 
+              href="/" 
               className="text-sm font-medium text-gray-700 hover:text-red-600 transition-colors duration-200 relative group"
             >
-              Stories
+              Home
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-600 transition-all duration-200 group-hover:w-full"></span>
+            </Link>
+            <Link 
+              href="/top-headlines" 
+              className="text-sm font-medium text-gray-700 hover:text-red-600 transition-colors duration-200 relative group"
+            >
+              News
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-600 transition-all duration-200 group-hover:w-full"></span>
             </Link>
             <Link 
               href="#" 
               className="text-sm font-medium text-gray-700 hover:text-red-600 transition-colors duration-200 relative group"
             >
-              Creator
+              About
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-600 transition-all duration-200 group-hover:w-full"></span>
             </Link>
             <Link 
               href="#" 
               className="text-sm font-medium text-gray-700 hover:text-red-600 transition-colors duration-200 relative group"
             >
-              Community
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-600 transition-all duration-200 group-hover:w-full"></span>
-            </Link>
-            <Link 
-              href="#" 
-              className="text-sm font-medium text-gray-700 hover:text-red-600 transition-colors duration-200 relative group"
-            >
-              Subscribe
+              Contact
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-600 transition-all duration-200 group-hover:w-full"></span>
             </Link>
           </nav>
@@ -78,28 +78,28 @@ const Header = () => {
           <div className="md:hidden border-t border-gray-200 bg-white">
             <div className="px-2 pt-2 pb-3 space-y-1">
               <Link 
-                href="#" 
+                href="/" 
                 className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-red-600 hover:bg-gray-50 rounded-md transition-colors duration-200"
               >
-                Stories
+                Home
+              </Link>
+              <Link 
+                href="/top-headlines" 
+                className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-red-600 hover:bg-gray-50 rounded-md transition-colors duration-200"
+              >
+                News
+              </Link>
+              <Link 
+                href="/about" 
+                className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-red-600 hover:bg-gray-50 rounded-md transition-colors duration-200"
+              >
+                About
               </Link>
               <Link 
                 href="#" 
                 className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-red-600 hover:bg-gray-50 rounded-md transition-colors duration-200"
               >
-                Creator
-              </Link>
-              <Link 
-                href="#" 
-                className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-red-600 hover:bg-gray-50 rounded-md transition-colors duration-200"
-              >
-                Community
-              </Link>
-              <Link 
-                href="#" 
-                className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-red-600 hover:bg-gray-50 rounded-md transition-colors duration-200"
-              >
-                Subscribe
+                Contact
               </Link>
             </div>
             <div className="pt-4 pb-3 border-t border-gray-200">

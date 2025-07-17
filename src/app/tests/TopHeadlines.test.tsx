@@ -1,9 +1,9 @@
 import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 
-import { TopHeadlines } from "../components/TopHeadlines";
 import * as useFetchNewsHook from "../hooks/useFetchNews";
 import { NewsArticle } from "../types/news";
+import TopHeadlines from "../top-headlines/page";
 
 jest.mock("next/navigation", () => ({
   useRouter: () => ({
