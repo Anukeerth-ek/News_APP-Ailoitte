@@ -13,9 +13,22 @@ export const TopHeadlines = () => {
      const router = useRouter();
      const searchParams = useSearchParams();
 
-     const initialCountry = searchParams.get("country") || "us";
-     const initialCategory = searchParams.get("category") || "";
-     const initialQuery = searchParams.get("q") || "";
+     let localPrefs = { country: "us", category: "", query: "" };
+
+     if (typeof window !== "undefined") {
+          const stored = localStorage.getItem("userPreferences");
+          if (stored) {
+               try {
+                    localPrefs = JSON.parse(stored);
+               } catch (e) {
+                    console.error("Invalid localStorage preferences:", e);
+               }
+          }
+     }
+
+     const initialCountry = searchParams.get("country") || localPrefs.country;
+     const initialCategory = searchParams.get("category") || localPrefs.category;
+     const initialQuery = searchParams.get("q") || localPrefs.query;
 
      const [country, setCountry] = useState(initialCountry);
      const [category, setCategory] = useState(initialCategory);
@@ -26,10 +39,21 @@ export const TopHeadlines = () => {
 
      useEffect(() => {
           const params = new URLSearchParams();
+
           if (country) params.set("country", country);
           if (category) params.set("category", category);
           if (query) params.set("q", query);
+
           router.push(`?${params.toString()}`);
+
+          localStorage.setItem(
+               "userPreferences",
+               JSON.stringify({
+                    country,
+                    category,
+                    query,
+               })
+          );
      }, [country, category, query]);
 
      useEffect(() => {
