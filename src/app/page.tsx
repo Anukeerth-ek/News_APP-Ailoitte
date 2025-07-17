@@ -2,6 +2,7 @@ import Header from "./components/Header";
 import HeroBanner from "./components/HeroBanner";
 import FeaturedArticles from "./components/FeaturedArticles";
 import { TopHeadlines } from "./components/TopHeadlines";
+import { Suspense } from "react";
 
 export default function Home() {
      return (
@@ -9,7 +10,9 @@ export default function Home() {
                <Header />
                <HeroBanner />
                <FeaturedArticles />
-               <TopHeadlines />
+               <Suspense fallback={<div>Loading news...</div>}>
+                    <TopHeadlines />
+               </Suspense>
           </div>
      );
 }
