@@ -1,13 +1,13 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useFetchNews } from "../hooks/useFetchNews";
+import { useFetchNews } from "../../hooks/useFetchNews";
 import { useRouter, useSearchParams } from "next/navigation";
-import CategoryDropdown from "../components/CategoryFilter";
-import SearchInput from "../components/Search";
-import NewsCard from "../components/NewsCard";
-import ErrorMessage from "../components/ErrorMessage";
-import { CountrySelector } from "../components/CountrySelector";
+import CategoryDropdown from "../CategoryFilter";
+import SearchInput from "../Search";
+import NewsCard from "../NewsCard";
+import ErrorMessage from "../ErrorMessage";
+import { CountrySelector } from "../CountrySelector";
 
 const TopHeadlines = () => {
      const router = useRouter();
@@ -85,7 +85,7 @@ const TopHeadlines = () => {
      if (error) return <ErrorMessage error={error} />;
 
      return (
-        <section className="px-4 sm:px-6 md:px-10 lg:px-16 xl:px-24 2xl:px-32 py-6">
+        <section className="px-4 ">
                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
                     <h2 className="text-2xl font-bold">Top Headlines</h2>
                     <div className="flex flex-col lg:flex-row gap-3 w-full sm:w-auto">
