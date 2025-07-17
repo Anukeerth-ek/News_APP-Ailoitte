@@ -4,15 +4,15 @@ import { handleCalculateReadTime } from "../utils/readTime";
 import { NewsArticle } from "../types/news";
 
 interface NewsCardProps {
-     id: string | number;
+     key: string | number;
      news: NewsArticle;
 }
-const NewsCard = ({ id, news }: NewsCardProps) => {
+const NewsCard = ({ key, news }: NewsCardProps) => {
      console.log("hello", news);
      const readTime = handleCalculateReadTime(news.content);
      const newCardFallBackImg = "/FeatureArticle_FallBack.webp";
      return (
-          <Link href={news.url} key={id} target="_blank" rel="noopener noreferrer">
+          <Link href={news.url} key={key} target="_blank" rel="noopener noreferrer">
                <div className="max-w-xs rounded-lg shadow-md bg-white overflow-hidden">
                     <div className="w-full h-48">
                          <img

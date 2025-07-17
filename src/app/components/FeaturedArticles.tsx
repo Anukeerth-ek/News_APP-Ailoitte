@@ -12,7 +12,7 @@ const FeaturedArticles = () => {
      console.log("feature", featured);
      const readTime = handleCalculateReadTime(featured.description);
      const featuredFallBackImg = "/FeatureArticle_FallBack.webp";
-     
+     if(error) return <p>Please refresh the page</p>
      return (
           <section className="flex flex-col md:flex-row md:justify-center gap-12 px-6 md:px-0 py-10 bg-white ">
                <div className="w-full md:w-1/2 h-1/2">

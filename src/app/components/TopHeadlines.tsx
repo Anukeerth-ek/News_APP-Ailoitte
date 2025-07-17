@@ -36,6 +36,7 @@ export const TopHeadlines = () => {
           setVisibleCount(8);
      }, [category, query]);
 
+     if(error) return <p>please refresh the page</p>
      return (
           <section className=" px-4">
                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
@@ -66,7 +67,7 @@ export const TopHeadlines = () => {
 
                <div className="grid grid-cols-1 xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     {newsData.slice(1, visibleCount).map((news, index) => (
-                         <NewsCard id={index} news={news} />
+                         <NewsCard key={index} news={news} />
                     ))}
                </div>
 

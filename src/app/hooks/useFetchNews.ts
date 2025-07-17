@@ -8,7 +8,6 @@ export const useFetchNews = (category?: string, query?: string) => {
      const [newsData, setNewsData] = useState<NewsArticle[]>([]);
      const [loading, setLoading] = useState(false);
      const [error, setError] = useState<string | null>(null);
-     const [page, setPage] = useState(1);
 
      useEffect(() => {
           if (!query) return;
@@ -18,11 +17,12 @@ export const useFetchNews = (category?: string, query?: string) => {
                     setLoading(true);
                     setError(null);
                     try {
-                         const data = await searchNews(query, page);
+                         const data = await searchNews(query, 1);
 
                          setNewsData(data.articles || []);
                     } catch (err) {
                          setError("Failed to fetch search results.");
+                         console.log("Error", err);
                     } finally {
                          setLoading(false);
                     }
@@ -32,7 +32,7 @@ export const useFetchNews = (category?: string, query?: string) => {
           }, 500);
 
           return () => clearTimeout(debounceTimeout);
-     }, [query, page]);
+     }, [query]);
 
      useEffect(() => {
           if (query) return;
@@ -43,21 +43,22 @@ export const useFetchNews = (category?: string, query?: string) => {
                try {
                     let data;
                     if (category) {
-                         data = await getCategoryNews(category, page);
+                         data = await getCategoryNews(category, 1);
                     } else {
-                         data = await getTopHeadlines(page);
+                         data = await getTopHeadlines(1);
                     }
                     console.log("arti", data.articles);
                     setNewsData(data.articles || []);
                } catch (err) {
                     setError("Failed to fetch news.");
+                    console.log("Error", err);
                } finally {
                     setLoading(false);
                }
           };
 
           fetchNews();
-     }, [category, page, query]);
+     }, [category, query]);
 
      return { newsData, loading, error };
 };
