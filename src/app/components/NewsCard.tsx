@@ -15,15 +15,13 @@ type NewsCardProps = {
 const NewsCard = ({ id, news }: any) => {
      console.log("hello", news);
      const readTime = handleCalculateReadTime(news.content);
+     const newCardFallBackImg = "/FeatureArticle_FallBack.webp";
      return (
           <Link href={news.url} target="_blank" rel="noopener noreferrer">
                <div className="max-w-xs rounded-lg shadow-md bg-white overflow-hidden">
                     <div className="w-full h-48">
                          <img
-                              src={
-                                   news.urlToImage ||
-                                   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHMZgOBFSHooVjTf0PFuur2m_wblFcG6fP-qC6TeeU1-BqvSiTLiSLraSRSb4_oId7tXE&usqp=CAU"
-                              }
+                              src={news.urlToImage || newCardFallBackImg}
                               alt={news.title}
                               className="w-full h-full object-cover"
                          />
