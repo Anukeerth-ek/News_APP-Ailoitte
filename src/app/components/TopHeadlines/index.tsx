@@ -63,7 +63,7 @@ export const TopHeadlines = () => {
                </div>
 
                <div className="grid grid-cols-1 xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    {newsData.slice(0, visibleCount).map((news, index) => (
+                    {newsData.slice(1, visibleCount).map((news, index) => (
                          <NewsCard key={index} news={news} />
                     ))}
                </div>
