@@ -6,6 +6,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import CategoryDropdown from "../CategoryFilter";
 import SearchInput from "../Search";
 import NewsCard from "../NewsCard";
+import ErrorMessage from "../ErrorMessage";
 
 export const TopHeadlines = () => {
      const router = useRouter();
@@ -49,7 +50,7 @@ export const TopHeadlines = () => {
           setQuery(e.target.value);
      };
 
-     if (error) return <p className="text-red-500 text-center">Error: {error}</p>;
+     if (error) return <ErrorMessage error={error} />;
 
      return (
           <section className="px-4">
