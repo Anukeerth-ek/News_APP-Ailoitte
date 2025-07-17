@@ -1,7 +1,8 @@
+import { NewsArticle } from "@/app/types/news";
+import { handleCalculateReadTime } from "@/app/utils/readTime";
 import Link from "next/link";
 import React from "react";
-import { handleCalculateReadTime } from "../utils/readTime";
-import { NewsArticle } from "../types/news";
+
 
 interface NewsCardProps {
      news: NewsArticle;

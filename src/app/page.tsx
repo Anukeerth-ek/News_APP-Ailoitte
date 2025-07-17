@@ -1,6 +1,6 @@
-import Header from "./components/Header";
-import HeroBanner from "./components/HeroBanner";
 import FeaturedArticles from "./components/FeaturedArticles";
+import Header from "./components/Header";
+import HeroBanner from "./components/HeroBanner/HeroBanner";
 import { TopHeadlines } from "./components/TopHeadlines";
 import { Suspense } from "react";
 

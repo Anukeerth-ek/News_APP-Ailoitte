@@ -1,8 +1,8 @@
 "use client";
 
+import { useFetchNews } from "@/app/hooks/useFetchNews";
+import { handleCalculateReadTime } from "@/app/utils/readTime";
 import React from "react";
-import { useFetchNews } from "../hooks/useFetchNews";
-import { handleCalculateReadTime } from "../utils/readTime";
 
 const FeaturedArticles = () => {
      const { newsData, loading, error } = useFetchNews();
