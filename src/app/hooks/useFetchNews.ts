@@ -1,31 +1,41 @@
-"use client"
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-import { useEffect, useState } from 'react';
+const API_KEY = process.env.NEXT_PUBLIC_NEWS_API_KEY;
+const BASE_URL = "https://newsapi.org/v2";
 
-type FetchFunction = (param?: any) => Promise<any>;
+export const useFetchNews = (category: string, query: string) => {
+     const [newsData, setNewsData] = useState<any[]>([]);
+     const [loading, setLoading] = useState(false);
+     const [error, setError] = useState<string | null>(null);
 
-export const useFetchNews = (
-  fetchFn: FetchFunction,
-  param?: any
-) => {
-  const [newsData, setnewsData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+     useEffect(() => {
+          const fetchNews = async () => {
+               setLoading(true);
+               setError(null);
 
-  useEffect(() => {
-    const load = async () => {
-      try {
-        setLoading(true);
-        const data = await fetchFn(param);
-        setnewsData(data.articles || []);
-      } catch (err: any) {
-        setError(err.message || 'Error loading news');
-      } finally {
-        setLoading(false);
-      }
-    };
-    load();
-  }, [fetchFn, param]);
+               try {
+                    let url = "";
 
-  return { newsData, loading, error };
+                    if (query) {
+                         url = `${BASE_URL}/everything?q=${query}&apiKey=${API_KEY}`;
+                    } else if (category) {
+                         url = `${BASE_URL}/top-headlines?category=${category}&country=us&apiKey=${API_KEY}`;
+                    } else {
+                         url = `${BASE_URL}/top-headlines?country=us&apiKey=${API_KEY}`;
+                    }
+
+                    const response = await axios.get(url);
+                    setNewsData(response.data.articles || []);
+               } catch (err: any) {
+                    setError("Failed to fetch news.");
+               } finally {
+                    setLoading(false);
+               }
+          };
+
+          fetchNews();
+     }, [category, query]);
+
+     return { newsData, loading, error };
 };
